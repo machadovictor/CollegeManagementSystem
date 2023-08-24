@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Assign Grades</title>
+</head>
+<body>
+    <div class="header flex-column">
+        <div class="logo-container">
+            <img src="/images/CDI_logo.png" alt="College CDI Logo" class="logo">
+        </div>
+        <br><br>
+        <div class="blocks-container">
+            <div class="form-container1">
+                <div class="title-container">
+                    <div class="title">Assign Grades</div>
+                </div>
+                <form action="/save-grades" method="post">
+                    <div class="columns-container">
+                        <div class="left-column">
+                            <label for="studentID" class="bold-label">Select Student ID:</label><br>
+                            <select id="studentID" name="studentID">
+                                <option value="">Select the Student ID</option>
+                                <% students.forEach(student => { %>
+                                    <option value="<%= student.studentID %>"><%= student.studentID %></option>
+                                <% }); %>
+                            </select>
+                            <br><br>
+                            
+                            <label for="firstName" class="input-label1">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" readonly class="grade-input1">
+                            <br>
+                            
+                            <label for="lastName" class="input-label1">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" readonly class="grade-input1">
+                            <br>
+                            
+                            <label for="programDescription" class="input-label1">Program Title:</label>
+                            <input type="text" id="programDescription" name="programDescription" readonly class="grade-input1">
+                            <br><br>
+                        </div>
+                        <div class="right-column">     
+                            <label for="course" class="bold-label course-label">Select Course:</label>
+                            <select id="course" name="course" class="course-select">
+                                <option value="">Select the Course</option>
+                                <% courses.forEach(course => { %>
+                                    <option value="<%= course.courseCode %>" data-program-code="<%= course.programCode %>"> 
+                                        <%= course.courseDescription.english %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                            <br><br>
+                            
+                            <label for="midtermGrade" class="input-label">Midterm:</label>
+                            <input type="number" id="midtermGrade" name="midtermGrade" min="0" max="100" class="grade-input">
+                            <br>
+                            
+                            <label for="finaltermGrade" class="input-label">Final Exam:</label>
+                            <input type="number" id="finaltermGrade" name="finaltermGrade" min="0" max="100" class="grade-input">
+                            <br>
+                            
+                            <label for="projectGrade" class="input-label">Project:</label>
+                            <input type="number" id="projectGrade" name="projectGrade" min="0" max="100" class="grade-input">
+                            <br>
+                            
+                            <label for="participationGrade" class="input-label">Participation:</label>
+                            <input type="number" id="participationGrade" name="participationGrade" min="0" max="100" class="grade-input">
+                            <br><br>
+                        </div>
+                    </div>
+                    <button type="submit" class="register-button">Save Grades</button>
+                </form>
+                <div class="success-message <% if (success === 'true') { %>show<% } %>">
+                    Grades have been successfully saved.
+                </div>      
+            </div>
+        </div>
+    </div>
+    <script>
+        const studentIDSelect = document.getElementById("studentID");
+        const firstNameInput = document.getElementById("firstName");
+        const lastNameInput = document.getElementById("lastName");
+        const programDescriptionInput = document.getElementById("programDescription");
+        const courseSelect = document.getElementById("course");
+
+        studentIDSelect.addEventListener("change", async () => {
+            const selectedStudentID = studentIDSelect.value;
+            if (selectedStudentID) {
+                try {
+                    const response = await fetch(`/get-student-info?studentID=${selectedStudentID}`);
+                    const studentInfo = await response.json();
+                    if (studentInfo) {
+                        firstNameInput.value = studentInfo.firstName;
+                        lastNameInput.value = studentInfo.lastName;
+                        programDescriptionInput.value = studentInfo.programDescription;
+
+                        const selectedProgramCode = studentInfo.programCode;
+
+                        // Fetch the course data from your MongoDB based on selectedProgramCode
+                        const courseResponse = await fetch(`/get-courses-by-program?programCode=${selectedProgramCode}`);
+                        const courses = await courseResponse.json();
+
+                        // Clear existing options
+                        courseSelect.innerHTML = '';
+
+                        // Populate the course select with filtered course options
+                        courses.forEach(course => {
+                            const option = document.createElement("option");
+                            option.value = course.courseCode;
+                            option.textContent = course.courseDescription.english;
+                            courseSelect.appendChild(option);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error fetching student information:", error);
+                }
+            } else {
+                // Reset fields and options when no student is selected
+                firstNameInput.value = "";
+                lastNameInput.value = "";
+                programDescriptionInput.value = "";
+                courseSelect.innerHTML = '<option value="">Select the Course</option>';
+            }
+        });
+
+        function hideSuccessMessage() {
+            var successMessage = document.querySelector('.success-message');
+            if (successMessage) {
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 2000); // Hide after 2 sec (2000 ms)
+            }
+        }
+
+        // call hide function
+        hideSuccessMessage();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs Registration</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="header flex-column">
+        <div class="logo-container">
+            <img src="/images/CDI_logo.png" alt="College CDI Logo" class="logo">
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="title-container">
+            <div class="title">Program Registration</div>
+        </div>
+        <form action="/register" method="post">
+            <label for="courseCode" class="bold-label">Program Code:</label>
+            <input type="text" id="programCode" name="programCode" placeholder="Please, type the Program Code" required>
+            <br><br>
+            <label for="englishDescription" class="bold-label">Program Title:</label>
+            <br><br>
+            <div class="flag-label">
+                <img src="/images/usa.png" alt="USA Flag" class="flag-icon">
+                <span class="flag-text description-label">Program Title in English:</span>
+            </div>
+            <input type="text" id="englishDescription" name="englishDescription" placeholder="Please, type the program name in English" required></textarea>
+            <br><br>
+            <label for="frenchDescription" class="description-label flag-label">
+                <img src="/images/french.png" alt="France Flag" class="flag-icon">
+                <span class="flag-text">Titre du Programme en Français:</span>
+            </label>
+            <input type="text" id="frenchDescription" name="frenchDescription" placeholder="Please, type the program name in French" required></textarea>
+            <br>
+            <button type="submit" class="register-button">Register Program</button>
+        </form>
+    </div>
+    
+    <div class="success-message <% if (registrationSuccess) { %>show<% } %>">
+        Program Registered Successfully!
+    </div>
+    <script>
+        function hideSuccessMessage() {
+            var successMessage = document.querySelector('.success-message');
+            if (successMessage) {
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 2000); // Hide after 2 sec (2000 ms)
+            }
+        }
+
+        // call hide function
+        hideSuccessMessage();
+    </script>
+</body>
+</html>
+
+
+
+

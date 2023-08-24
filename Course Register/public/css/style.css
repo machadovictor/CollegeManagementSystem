@@ -1,0 +1,219 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    color: #1e3a8a; 
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.logo {
+    width: auto;
+    height: 120px;
+    margin-right: 10px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+
+.form-container {
+    background-color: #fff;
+    padding: 15px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+}
+
+.bold-label {
+    font-weight: bold;
+}
+
+.description-label {
+    font-weight: normal;
+    color: #1e3a8a;
+}
+
+::placeholder {
+    color: #ccc; 
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+    color: #ccc; 
+}
+
+.form-container textarea,
+.form-container input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.flag-text {
+    font-weight: normal;
+}
+
+.register-button {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 5px auto;
+}
+
+.register-button:hover {
+    background-color: #152c60;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.button-container {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.button-container:hover {
+    background-color: #152c60;
+}
+
+.success-message {
+    background-color: #5cb85c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.success-message.show {
+    opacity: 1;
+}
+
+body {
+    overflow-y: auto;
+}
+
+.form-container .input-label {
+    display: inline-block;
+    width: 150px; 
+    margin-right: 10px;
+}
+
+
+.form-container .grade-input {
+    display: inline-block;
+    width: 50px; 
+}
+
+.form-container .input-label1 {
+    display: block;
+    width: auto; 
+}
+
+
+.form-container .grade-input1 {
+    display: block;
+    width: 200px; 
+}
+
+.columns-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.left-column {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.right-column {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-container1 {
+    background-color: #fff;
+    padding: 15px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container1 textarea,
+.form-container1 input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.course-label {
+    display: inline-block;
+    width: 150px; 
+    margin-right: 10px;
+}
+
+.course-select {
+    display: inline-block;
+    width: 200px; 
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="header flex-column">
+        <div class="logo-container">
+            <img src="/images/CDI_logo.png" alt="College CDI Logo" class="logo">
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="title-container">
+            <div class="title">Student Registration</div>
+        </div>
+        <form action="/register-student" method="post">
+            <label for="programCode" class="bold-label">Select Program:</label>
+            <select id="programCode" name="programCode">
+                <% programs.forEach(program => { %>
+                    <option value="<%= program.programCode %>"><%= program.programCode %></option>
+                <% }); %>
+            </select>
+            <br><br>
+            <label for="firstName" class="bold-label">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="Please enter the student's first name">
+            <br><br>
+            <label for="lastName" class="bold-label">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Please enter the student's last name">
+            <br><br>
+            <label for="birthDate" class="bold-label">Date of Birth:</label>
+            <input type="date" id="birthDate" name="birthDate" required>
+            <br><br>
+            <button type="submit" class="register-button">Register Student</button>
+        </form>
+    </div>
+    <div class="success-message <% if (registrationSuccess) { %>show<% } %>">
+        Student Registered Successfully!
+    </div>
+    <script>
+        function hideSuccessMessage() {
+            var successMessage = document.querySelector('.success-message');
+            if (successMessage) {
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 2000); // Hide after 2 sec (2000 ms)
+            }
+        }
+
+        // call hide function
+        hideSuccessMessage();
+    </script>
+</body>
+</html>
